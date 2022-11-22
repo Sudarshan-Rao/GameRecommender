@@ -8,18 +8,42 @@ You'll dodge homing bombs and direct them into explosives, ignite or destroy gen
 In addition to over a hundred levels is the same fully featured editor used to create them, complete with integrated Steam Workshop support support so you can seamlessly build levels or even mini-campaigns and share them with people looking for a new or creative challenge.
 """
 
-ratio = fuzz.token_set_ratio(game_desc, "quick")
+# ratio = fuzz.token_set_ratio(game_desc, "quick")
 
-print(ratio)
+# print(ratio)
 
-with open("../resources/preset_keywords.txt") as file:
-    lines = [line.rstrip() for line in file]
+# with open("../resources/preset_keywords.txt") as file:
+#     lines = [line.rstrip() for line in file]
 
 db_connection = sqlite3.connect("../resources/preprocess.db")
+db_connection.row_factory = sqlite3.Row 
 db_cursor = db_connection.cursor()
 
-for line in lines:
-    db_cursor.execute("INSERT INTO Tags VALUES (?, ?)", (None, line))
+# for tagId in range(len(lines)):
+#     db_cursor.execute("INSERT INTO Phrases VALUES (?, ?, ?, ?)", (None, tagId + 1, lines[tagId], 0))
+# db_connection.commit()
+
+
+
+db_cursor.execute("select * from GameData")
+
+game_data = db_cursor.fetchall()
+
+db_cursor.execute("select * from Phrases where Processed = 0")
+
+phrases = db_cursor.fetchall()
+
+for game_index in range(len(game_data)):
+    print(game_index)
+    for phrase in phrases:
+        game = game_data[game_index]
+        about_ratio  = fuzz.token_set_ratio(game["about"], phrase["phrase"])
+        review_ratio = fuzz.token_set_ratio(game["reviews"], phrase["phrase"])
+        if about_ratio > 90 or review_ratio > 90:
+            db_cursor.execute("INSERT INTO TaggedGames VALUES (?, ?, ?, ?)", (None, game["steamId"], phrase["tagId"], phrase["id"]))
+        db_cursor.execute("UPDATE Phrases SET Processed = 1 WHERE id = "+ str(phrase["id"]))
+
+
 db_connection.commit()
 
 
