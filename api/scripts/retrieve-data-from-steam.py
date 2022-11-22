@@ -21,33 +21,43 @@ db_cursor = db_connection.cursor()
 url = "https://store.steampowered.com/api/appdetails?key=D0ACA5A3654DEC695239E8B4F18F137D&appids="
 headers = {"Accept-Language": "en-US,en;q=0.9"}
 
-data_tuple_list = []
 
-for index in range(1000, 2000):
-    appid = str(game_list[index]["appid"])
-    responseObject = requests.get(url + appid, headers=headers)
+for index_start in range(10000, 15000, 10):
+    data_tuple_list = []
+    for index in range(index_start, index_start + 10):
+        print("continuing...")
+        appid = str(game_list[index]["appid"])
+        responseObject = requests.get(url + appid, headers=headers)
 
-    if "data" not in responseObject.json()[appid]:
-        print(responseObject.json())
-        continue
-    about_the_game_raw = responseObject.json()[appid]["data"]["about_the_game"]
-    about_the_game = BeautifulSoup(about_the_game_raw, "lxml").text
+        if "data" not in responseObject.json()[appid]:
+            print(responseObject.json())
+            continue
+        if responseObject.json()[appid]["data"]["type"] != "game":
+            print(index)
+            print("not game\n")
+            sleep(3)
+            continue
+        about_the_game_raw = responseObject.json()[appid]["data"]["about_the_game"]
+        about_the_game = BeautifulSoup(about_the_game_raw, "lxml").text
 
-    reviews = ""
-    if "reviews" in responseObject.json()[appid]["data"]:
-        reviews_raw = responseObject.json()[appid]["data"]["reviews"]
-        reviews = BeautifulSoup(reviews_raw, "lxml").text
+        reviews = ""
+        if "reviews" in responseObject.json()[appid]["data"]:
+            reviews_raw = responseObject.json()[appid]["data"]["reviews"]
+            reviews = BeautifulSoup(reviews_raw, "lxml").text
 
-    header_image = responseObject.json()[appid]["data"]["header_image"]
+        header_image = responseObject.json()[appid]["data"]["header_image"]
 
-    data_tuple = (appid, about_the_game, reviews, header_image)
-    data_tuple_list.append(data_tuple)
-    print(index)
-    print(appid)
-    print(" - sleeping \n")
-    sleep(3)
+        data_tuple = (appid, about_the_game, reviews, header_image)
+        data_tuple_list.append(data_tuple)
+        print("is game")
+        print(index)
+        print(appid)
+        print(" - sleeping \n")
+        sleep(3)
 
-db_cursor.executemany("INSERT INTO GameData VALUES (?,?,?,?)", data_tuple_list)
-db_connection.commit()
+    db_cursor.executemany("INSERT INTO GameData VALUES (?,?,?,?)", data_tuple_list)
+    db_connection.commit()
+    print("waiting for input..\n")
+    sleep(2)
 
 
