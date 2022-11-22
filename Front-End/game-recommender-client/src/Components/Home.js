@@ -1,248 +1,94 @@
-import React from 'react'
-import { useState } from 'react'
+import React from 'react';
+import { useState, useEffect } from 'react';
+import useGameSearch from '../CustomHooks/useGameSearch';
+import Loading from './Loading';
+import NavBar from './NavBar';
+import Footer from './Footer';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 const Home = () => {
-    const [search, setSearch] = useState('')
-    const [games, setGames] = useState([])
-    const [game, setGame] = useState({})
-    const [recommendations, setRecommendations] = useState([])
-    const [recommendation, setRecommendation] = useState({})
-    const [user, setUser] = useState({})
-    const [users, setUsers] = useState([])
-    const [userGames, setUserGames] = useState([])
-    const [userGame, setUserGame] = useState({})
-    const [userRecommendations, setUserRecommendations] = useState([])
-    const [userRecommendation, setUserRecommendation] = useState({})
-    const [userSearches, setUserSearches] = useState([])
-    const [userSearch, setUserSearch] = useState({})
+  const [search, setSearch] = useState('');
+  const [games, setGames] = useState([]);
+  const searchGames = useGameSearch();
+  const [isLoading, setIsLoading] = useState(false);
 
-    const handleSearch = (e) => {
-        e.preventDefault()
-        fetch(`http://localhost:5000/api/games/search/${search}`)
-            .then(res => res.json())
-            .then(data => {
-                setGames(data)
-            })
-    }
+  useEffect(() => {
+    console.log(`games: ${games}`);
+  }, [games]);
 
-    const handleGame = (e) => {
-        e.preventDefault()
-        fetch(`http://localhost:5000/api/games/${e.target.id}`)
-            .then(res => res.json())
-            .then(data => {
-                setGame(data)
-            })
-    }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    const { data } = await searchGames(search);
+    setGames(data.results);
+    setIsLoading(false);
+  };
 
-    const handleRecommendation = (e) => {
-        e.preventDefault()
-        fetch(`http://localhost:5000/api/recommendations/${e.target.id}`)
-            .then(res => res.json())
-            .then(data => {
-                setRecommendation(data)
-            })
-    }
-
-    const handleUser = (e) => {
-        e.preventDefault()
-        fetch(`http://localhost:5000/api/users/${e.target.id}`)
-            .then(res => res.json())
-            .then(data => {
-                setUser(data)
-            })
-    }
-
-    const handleUserGame = (e) => {
-        e.preventDefault()
-        fetch(`http://localhost:5000/api/user_games/${e.target.id}`)
-            .then(res => res.json())
-            .then(data => {
-                setUserGame(data)
-            })
-    }
-
-    const handleUserRecommendation = (e) => {
-        e.preventDefault()
-        fetch(`http://localhost:5000/api/user_recommendations/${e.target.id}`)
-            .then(res => res.json())
-            .then(data => {
-                setUserRecommendation(data)
-            })
-    }
-
-    const handleUserSearch = (e) => {
-        e.preventDefault()
-        fetch(`http://localhost:5000/api/user_searches/${e.target.id}`)
-            .then(res => res.json())
-            .then(data => {
-                setUserSearch(data)
-            })
-    }
-
-    return (
-        <div>
-            <h1>Home</h1>
-            <form onSubmit={handleSearch}>
-                <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} />
-                <input type="submit" value="Search" />
-            </form>
-            <div>
-                {games.map(game => {
-                    return (
-                        <div key={game.id}>
-                            <h3>{game.name}</h3>
-                            <img src={game.image_url} alt={game.name} />
-                            <p>{game.description}</p>
-                            <button id={game.id} onClick={handleGame}>More Info</button>
-                        </div>
-                    )
-                })}
-            </div>
-            <div>
-                <h3>{game.name}</h3>
-                <img src={game.image_url} alt={game.name} />
-                <p>{game.description}</p>
-                <p>Released: {game.released}</p>
-                <p>Rating: {game.rating}</p>
-                <p>Playtime: {game.playtime}</p>
-                <p>Metacritic: {game.metacritic}</p>
-                <p>Website: <a href={game.website}>{game.website}</a></p>
-                <p>Genres: {game.genres}</p>
-                <p>Platforms: {game.platforms}</p>
-                <p>Developers: {game.developers}</p>
-                <p>Publishers: {game.publishers}</p>
-                <p>Tags: {game.tags}</p>
-                <p>Stores: {game.stores}</p>
-                <p>Similar Games: {game.similar_games}</p>
-                <p>Recommendations: {game.recommendations}</p>
-                <p>Added By: {game.added_by}</p>
-                <p>Added On: {game.added_on}</p>
-                <p>Updated By: {game.updated_by}</p>
-                <p>Updated On: {game.updated_on}</p>
-            </div>
-            <div>
-                {recommendations.map(recommendation => {
-                    return (
-                        <div key={recommendation.id}>
-                            <h3>{recommendation.name}</h3>
-                            <img src={recommendation.image_url} alt={recommendation.name} />
-                            <p>{recommendation.description}</p>
-                            <button id={recommendation.id} onClick={handleRecommendation}>More Info</button>
-                        </div>
-                    )
-                })}
-            </div>
-            <div>
-                <h3>{recommendation.name}</h3>
-                <img src={recommendation.image_url} alt={recommendation.name} />
-                <p>{recommendation.description}</p>
-                <p>Released: {recommendation.released}</p>
-                <p>Rating: {recommendation.rating}</p>
-                <p>Playtime: {recommendation.playtime}</p>
-                <p>Metacritic: {recommendation.metacritic}</p>
-                <p>Website: <a href={recommendation.website}>{recommendation.website}</a></p>
-                <p>Genres: {recommendation.genres}</p>
-                <p>Platforms: {recommendation.platforms}</p>
-                <p>Developers: {recommendation.developers}</p>
-                <p>Publishers: {recommendation.publishers}</p>
-                <p>Tags: {recommendation.tags}</p>
-                <p>Stores: {recommendation.stores}</p>
-                <p>Similar Games: {recommendation.similar_games}</p>
-                <p>Recommendations: {recommendation.recommendations}</p>
-                <p>Added By: {recommendation.added_by}</p>
-                <p>Added On: {recommendation.added_on}</p>
-                <p>Updated By: {recommendation.updated_by}</p>
-                <p>Updated On: {recommendation.updated_on}</p>
-            </div>
-            <div>
-                {users.map(user => {
-                    return (
-                        <div key={user.id}>
-                            <h3>{user.username}</h3>
-                            <p>{user.email}</p>
-                            <button id={user.id} onClick={handleUser}>More Info</button>
-                        </div>
-                    )
-                })}
-            </div>
-            <div>
-                <h3>{user.username}</h3>
-                <p>{user.email}</p>
-                <p>Added By: {user.added_by}</p>
-                <p>Added On: {user.added_on}</p>
-                <p>Updated By: {user.updated_by}</p>
-                <p>Updated On: {user.updated_on}</p>
-            </div>
-            <div>
-                {userGames.map(userGame => {
-                    return (
-                        <div key={userGame.id}>
-                            <h3>{userGame.name}</h3>
-                            <img src={userGame.image_url} alt={userGame.name} />
-                            <p>{userGame.description}</p>
-                            <button id={userGame.id} onClick={handleUserGame}>More Info</button>
-                        </div>
-                    )
-                })}
-            </div>
-            <div>
-                <h3>{userGame.name}</h3>
-                <img src={userGame.image_url} alt={userGame.name} />
-                <p>{userGame.description}</p>
-                <p>Released: {userGame.released}</p>
-                <p>Rating: {userGame.rating}</p>
-                <p>Playtime: {userGame.playtime}</p>
-                <p>Metacritic: {userGame.metacritic}</p>
-                <p>Website: <a href={userGame.website}>{userGame.website}</a></p>
-                <p>Genres: {userGame.genres}</p>
-                <p>Platforms: {userGame.platforms}</p>
-                <p>Developers: {userGame.developers}</p>
-                <p>Publishers: {userGame.publishers}</p>
-                <p>Tags: {userGame.tags}</p>
-                <p>Stores: {userGame.stores}</p>
-                <p>Similar Games: {userGame.similar_games}</p>
-                <p>Recommendations: {userGame.recommendations}</p>
-                <p>Added By: {userGame.added_by}</p>
-                <p>Added On: {userGame.added_on}</p>
-                <p>Updated By: {userGame.updated_by}</p>
-                <p>Updated On: {userGame.updated_on}</p>
-            </div>
-            <div>
-                {userRecommendations.map(userRecommendation => {
-                    return (
-                        <div key={userRecommendation.id}>
-                            <h3>{userRecommendation.name}</h3>
-                            <img src={userRecommendation.image_url} alt={userRecommendation.name} />
-                            <p>{userRecommendation.description}</p>
-                            <button id={userRecommendation.id} onClick={handleUserRecommendation}>More Info</button>
-                        </div>
-                    )
-                })}
-            </div>
-            <div>
-                <h3>{userRecommendation.name}</h3>
-                <img src={userRecommendation.image_url} alt={userRecommendation.name} />
-                <p>{userRecommendation.description}</p>
-                <p>Released: {userRecommendation.released}</p>
-                <p>Rating: {userRecommendation.rating}</p>
-                <p>Playtime: {userRecommendation.playtime}</p>
-                <p>Metacritic: {userRecommendation.metacritic}</p>
-                <p>Website: <a href={userRecommendation.website}>{userRecommendation.website}</a></p>
-                <p>Genres: {userRecommendation.genres}</p>
-                <p>Platforms: {userRecommendation.platforms}</p>
-                <p>Developers: {userRecommendation.developers}</p>
-                <p>Publishers: {userRecommendation.publishers}</p>
-                <p>Tags: {userRecommendation.tags}</p>
-                <p>Stores: {userRecommendation.stores}</p>
-                <p>Similar Games: {userRecommendation.similar_games}</p>
-                <p>Recommendations: {userRecommendation.recommendations}</p>
-                <p>Added By: {userRecommendation.added_by}</p>
-                <p>Added On: {userRecommendation.added_on}</p>
-                <p>Updated By: {userRecommendation.updated_by}</p>
-                <p>Updated On: {userRecommendation.updated_on}</p>
-            </div>
+  return (
+    <div className="Home">
+      <NavBar />
+      <div className="container mx-auto">
+        <div className="flex flex-col items-center justify-center mt-5">
+          <h1 className="text-4xl font-bold text-center text-gray-800">
+            Welcome to Game Recommender!
+          </h1>
+          <p className="text-xl text-center text-gray-600 mt-5">
+            Search for a game to get started!
+          </p>
         </div>
-    )
-}
+        <div className="flex items-center px-3 py-2 rounded-lg bg-gray-50 dark:bg-gray-700">
+          <span className="inline-flex justify-center p-2 text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+            <FontAwesomeIcon icon={faSearch} />
+          </span>
+          <textarea
+            type="text"
+            placeholder="Search for a game"
+            rows={1}
+            className="block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-yellow-500 focus:border-yellow-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          <button
+            className="inline-flex justify-center p-2 text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600"
+            onClick={handleSubmit}
+          >
+            Search
+          </button>
+        </div>
+        <div className="flex flex-col items-center justify-center">
+          {isLoading ? (
+            <Loading />
+          ) : (
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+              {games.map((game) => (
+                <div key={game.id} className="p-4">
+                  <div className="flex flex-col items-center justify-center h-full p-4 bg-white rounded-lg shadow-lg dark:bg-gray-800">
+                    <div className="flex items-center justify-center w-12 h-12 mb-4 bg-indigo-100 rounded-full dark:bg-indigo-700">
+                      <img
+                        src={
+                          game.image
+                            ? game.image
+                            : 'https://www.freeiconspng.com/uploads/no-image-icon-11.PNG'
+                        }
+                        alt="game"
+                      />
+                    </div>
+                    <h2 className="mb-2 text-lg font-medium text-gray-800 dark:text-white">
+                      {game.name}
+                    </h2>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      {game.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+      <Footer />
+    </div>
+  );
+};
 
-export default Home
+export default Home;

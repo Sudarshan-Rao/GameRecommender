@@ -2,22 +2,90 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-.App-Navbar {
-  background-color: #282c34;
-  /* min-height: 100vh; */
+.navbar_logo {
+  width: 50px;
+  height: 50px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center;
+}
+
+.navbar_logo img {
+  width: 100%;
+  height: 100%;
+}
+
+.navbar_left {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 50%;
+}
+
+.navbar_right {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 50%;
+}
+
+.navbar_link {
+  text-decoration: none;
+  color: #fff;
+}
+
+.navbar_link:hover {
+  color: #000;
+}
+
+.navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  background: linear-gradient(
+    58deg,
+    rgba(243, 172, 18, 1) 20%,
+    rgba(241, 196, 15, 1) 100%
+  );
+  border-bottom: 1px solid #ccc;
+}
+
+.errmsg {
+  background-color: #f44336;
   color: white;
+  font-size: 1rem;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin: 10px 0;
+}
+
+.offscreen {
+  position: absolute;
+  left: -9999px;
+}
+
+.Footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  background: linear-gradient(
+    58deg,
+    rgba(243, 172, 18, 1) 20%,
+    rgba(241, 196, 15, 1) 100%
+  );
+  border-top: 1px solid #ccc;
+  bottom: 0;
+  position: fixed;
+}
+
+.Footer p {
+  color: #fff;
 }

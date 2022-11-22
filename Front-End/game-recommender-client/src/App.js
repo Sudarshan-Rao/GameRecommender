@@ -1,36 +1,45 @@
 import './App.css';
+import { Routes, Route } from 'react-router-dom';
 import Login from './Components/Login';
-import SignUp from './Components/SignUp';
-import Home from './Components/Home';
-import Profile from './Components/Profile';
-import Game from './Components/Game';
-import Search from './Components/Search';
-import Recommendations from './Components/Recommendations';
+import Register from './Components/Register';
 import NotFound from './Components/NotFound';
-import { Link, BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Layout from './Components/Layout';
+import Home from './Components/Home';
+// import Profile from './Components/Profile';
+// import Game from './Components/Game';
+// import Search from './Components/SearchBar';
+// import Recommendations from './Components/Recommendations';
+import Unauthorized from './Components/Unauthorized';
+import PersistLogin from './Components/PersistentLogin';
+import RequireAuth from './Components/RequireAuth';
 
 function App() {
   return (
-    <div className="App">
-      <Router>
-        <nav className='App-Navbar'>
-          <Link to="/">Home</Link>
-          <Link to="profile">Profile</Link>
-          <Link to="search">Search</Link>
-          <Link to="recommendations">Recommendations</Link>
-        </nav>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="login" element={<Login />} />
-          <Route path="signup" element={<SignUp />} />
-          <Route path="profile" element={<Profile />} />
-          <Route path="game" element={<Game />} />
-          <Route path="search" element={<Search />} />
-          <Route path="recommendations" element={<Recommendations />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Router>
-    </div>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        {/* public */}
+        <Route path="login" element={<Login />} />
+        <Route path="register" element={<Register />} />
+        <Route path="unauthorized" element={<Unauthorized />} />
+
+        {/* private */}
+        <Route element={<PersistLogin />}>
+          <Route element={<RequireAuth />}>
+            <Route path="/" element={<Home />} />
+            {/* <Route path="profile" element={<Profile />} /> */}
+            {/* <Route path="game/:id" element={<Game />} /> */}
+            {/* <Route path="search" element={<Search />} /> */}
+            {/* <Route
+              path="recommendations"
+              element={<Recommendations />}
+            /> */}
+          </Route>
+        </Route>
+
+        {/* not found */}
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </Routes>
   );
 }
 
