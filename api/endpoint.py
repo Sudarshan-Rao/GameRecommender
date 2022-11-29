@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import sys
 
-sys.path.append('/Users/sachinvm/Desktop/Purdue Study/Fall 2022/Web Dev/Project/GameRecV2/GameRecommender/api/utils')
+sys.path.append('./utils')
 
 from utils import get_recommendation
 
@@ -15,7 +15,8 @@ origins = [
     "http://localhost:8090",
     "http://localhost:8000",
     "http://localhost:8000/login.html?",
-    "http://18.188.61.131/ui/"
+    "http://18.188.61.131/ui/",
+    "*"
 ]
 
 app.add_middleware(
