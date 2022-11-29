@@ -13,7 +13,7 @@ def get_ngrams(search_string):
 
 # get all tags
 def load_all_tags():
-    db_connection = sqlite3.connect("/Users/sachinvm/Desktop/Purdue Study/Fall 2022/Web Dev/Project/GameRecV2/GameRecommender/api/resources/preprocess.db")
+    db_connection = sqlite3.connect("./resources/preprocess.db")
     db_cursor = db_connection.cursor()
     db_cursor.execute("SELECT * FROM TAGS")
     tags_table = db_cursor.fetchall()
