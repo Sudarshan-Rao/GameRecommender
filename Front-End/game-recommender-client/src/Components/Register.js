@@ -34,7 +34,6 @@ const Register = () => {
   const [success, setSuccess] = useState(false);
 
   const [errMsg, setErrMsg] = useState('');
-  // const [success, setSuccess] = useState(false);
 
   useEffect(() => {
     userRef.current.focus();
@@ -61,15 +60,7 @@ const Register = () => {
       setErrMsg('Invalid Entry');
       return;
     }
-    console.log('Registering');
     try {
-      console.log(
-        JSON.stringify({
-          email: userEmail,
-          name: userName,
-          password: pwd,
-        })
-      );
       const response = await axiosInstance.post(
         REGISTER_URL,
         JSON.stringify({
@@ -86,7 +77,6 @@ const Register = () => {
       // TODO: remove console.logs before deployment
       console.log(JSON.stringify(response?.data));
 
-      //   if (response?.data?.accessToken) {
       setAuth({
         user: userEmail,
         accessToken: response?.data?.accessToken,
@@ -103,9 +93,6 @@ const Register = () => {
       setPwd('');
       setMatchPwd('');
       setSuccess(true);
-      //   } else {
-      //     setErrMsg(`Registration failed: ${response?.data?.message}`);
-      //   }
     } catch (err) {
       console.error(err);
       if (!err?.response) {
@@ -125,16 +112,18 @@ const Register = () => {
   return (
     <>
       {success ? (
-        <div className="flex flex-col items-center justify-center w-full h-full">
-          <h1 className="text-2xl font-bold text-center text-green-500">
-            Registration Successful
-          </h1>
-          <button
-            className="px-4 py-2 mt-4 text-white bg-green-500 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-75"
-            onClick={() => navigate('/')}
-          >
-            Login
-          </button>
+        <div className="container mx-auto">
+          <div className="flex flex-col items-center justify-center h-screen">
+            <h1 className="text-3xl font-bold text-gray-800">
+              Registration Successful
+            </h1>
+            <button
+              className="px-4 py-2 mt-4 text-white bg-yellow-500 rounded hover:bg-yellow-600"
+              onClick={() => navigate('/login')}
+            >
+              Login
+            </button>
+          </div>
         </div>
       ) : (
         <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -157,9 +146,8 @@ const Register = () => {
                     type="email"
                     autoComplete="email"
                     required
-                    className={`appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm ${
-                      userFocus ? 'focus:border-blue-500' : ''
-                    }`}
+                    className={`appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm ${userFocus ? 'focus:border-blue-500' : ''
+                      }`}
                     placeholder="Email address"
                     value={userEmail}
                     onChange={(e) => setUserEmail(e.target.value)}
@@ -168,7 +156,6 @@ const Register = () => {
                     ref={userRef}
                   />
                 </div>
-                {/* errMsg */}
                 <div className="text-red-500 text-sm">{errMsg}</div>
                 <p
                   id="uidnote"
@@ -190,9 +177,8 @@ const Register = () => {
                     type="text"
                     autoComplete="name"
                     required
-                    className={`appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm ${
-                      nameFocus ? 'focus:border-blue-500' : ''
-                    }`}
+                    className={`appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm ${nameFocus ? 'focus:border-blue-500' : ''
+                      }`}
                     placeholder="Name"
                     value={userName}
                     onChange={(e) => setUserName(e.target.value)}
@@ -210,9 +196,8 @@ const Register = () => {
                     type="password"
                     autoComplete="current-password"
                     required
-                    className={`appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm ${
-                      pwdFocus ? 'focus:border-blue-500' : ''
-                    }`}
+                    className={`appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm ${pwdFocus ? 'focus:border-blue-500' : ''
+                      }`}
                     placeholder="Password"
                     value={pwd}
                     onChange={(e) => setPwd(e.target.value)}
@@ -242,9 +227,8 @@ const Register = () => {
                     type="password"
                     autoComplete="current-password"
                     required
-                    className={`appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm ${
-                      matchFocus ? 'focus:border-blue-500' : ''
-                    }`}
+                    className={`appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm ${matchFocus ? 'focus:border-blue-500' : ''
+                      }`}
                     placeholder="Confirm Password"
                     value={matchPwd}
                     onChange={(e) => setMatchPwd(e.target.value)}
@@ -267,11 +251,10 @@ const Register = () => {
               <div>
                 <button
                   type="submit"
-                  className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 ${
-                    validEmail && validPwd && validMatch
-                      ? ''
-                      : 'opacity-50 cursor-not-allowed'
-                  }`}
+                  className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 ${validEmail && validPwd && validMatch
+                    ? ''
+                    : 'opacity-50 cursor-not-allowed'
+                    }`}
                   disabled={!(validEmail && validPwd && validMatch)}
                 >
                   <span className="absolute left-0 inset-y-0 flex items-center pl-3">

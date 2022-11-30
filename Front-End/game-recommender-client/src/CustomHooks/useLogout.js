@@ -1,18 +1,17 @@
-import axios from '../Api/axiosInstance';
+import axiosInstance from '../Api/axiosInstance';
 import useAuth from './useAuth';
-import { useNavigate } from 'react-router-dom';
 
 const useLogout = () => {
   const { setAuth } = useAuth();
-  const navigate = useNavigate();
 
   const logout = async () => {
     setAuth({});
     try {
-      await axios('/logout', {
-        withCredentials: true,
+      await axiosInstance.post('/logout', {
+        headers: {
+          'Content-Type': 'application/json',
+        },
       });
-      navigate('/');
     } catch (error) {
       console.log(error);
     }

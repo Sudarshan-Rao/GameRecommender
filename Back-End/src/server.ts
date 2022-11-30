@@ -4,7 +4,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
-import { isAuth } from './modules/auth';
+import { isAuth, refreshTokenHandler } from './modules/auth';
 import {
   loginUserHandler,
   registerUserHandler,
@@ -17,6 +17,7 @@ export const allowedOrigins = [
   'http://127.0.0.1:5500',
   'http://localhost:3500',
   'http://localhost:3000',
+  'http://127.0.0.1:3000',
 ];
 
 const corsOptions = {
@@ -47,11 +48,12 @@ app.get('/', (req, res) => {
   res.json({ message: 'Hello from express' });
 });
 
-app.use('/api', isAuth, router);
-
 app.post('/register', registerUserHandler);
 app.post('/login', loginUserHandler);
-router.get('/logout', logoutUserHandler);
+app.get('/refresh', refreshTokenHandler);
+app.post('/logout', logoutUserHandler);
+
+app.use('/api', isAuth, router);
 
 app.use((err, req, res, next) => {
   if (err.type === 'auth') {

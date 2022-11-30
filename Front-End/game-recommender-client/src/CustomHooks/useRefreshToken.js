@@ -1,11 +1,14 @@
-import axios from '../Api/axiosInstance';
+import axiosInstance from '../Api/axiosInstance';
 import useAuth from './useAuth';
 
 const useRefreshToken = () => {
   const { setAuth } = useAuth();
 
   const refresh = async () => {
-    const response = await axios.get('/refresh');
+    console.log(`Document.cookie: ${document.cookie}`);
+    const response = await axiosInstance.get('/refresh');
+    console.log(`response: ${JSON.stringify(response)}`);
+    console.log(response);
     setAuth((prev) => {
       console.log(JSON.stringify(prev));
       console.log(response.data.accessToken);
