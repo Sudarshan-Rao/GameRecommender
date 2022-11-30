@@ -5,13 +5,11 @@ import Register from './Components/Register';
 import NotFound from './Components/NotFound';
 import Layout from './Components/Layout';
 import Home from './Components/Home';
-// import Profile from './Components/Profile';
-// import Game from './Components/Game';
-// import Search from './Components/SearchBar';
-// import Recommendations from './Components/Recommendations';
+import Trending from './Components/Trending';
 import Unauthorized from './Components/Unauthorized';
 import PersistLogin from './Components/PersistentLogin';
 import RequireAuth from './Components/RequireAuth';
+import DashBoardLayout from './Components/DashBoardLayout';
 
 function App() {
   return (
@@ -25,14 +23,10 @@ function App() {
         {/* private */}
         <Route element={<PersistLogin />}>
           <Route element={<RequireAuth />}>
-            <Route path="/" element={<Home />} />
-            {/* <Route path="profile" element={<Profile />} /> */}
-            {/* <Route path="game/:id" element={<Game />} /> */}
-            {/* <Route path="search" element={<Search />} /> */}
-            {/* <Route
-              path="recommendations"
-              element={<Recommendations />}
-            /> */}
+            <Route path="/" element={<DashBoardLayout />}>
+              <Route path="/" element={<Home />} />
+              <Route path="trending" element={<Trending />} />
+            </Route>
           </Route>
         </Route>
 

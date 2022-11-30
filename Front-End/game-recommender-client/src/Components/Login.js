@@ -38,8 +38,7 @@ const Login = () => {
         JSON.stringify({ email: userEmail, password: pwd }),
         {
           headers: {
-            'Content-Type': 'application/json',
-            withCredentials: true,
+            'Content-Type': 'application/json'
           },
         }
       );
@@ -56,6 +55,7 @@ const Login = () => {
         })
       );
       // store refresh token in cookie
+      console.log(`Document.cookie: ${document.cookie}`);
 
       setUserEmail('');
       setPwd('');
