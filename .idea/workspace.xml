@@ -4,50 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd594a56-4ebd-4e4a-944d-5eca868d2bef" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/endpoint.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/endpoint.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/resources/nltk_data/models/punkt/PY3/README" beforeDir="false" afterPath="$PROJECT_DIR$/api/resources/nltk_data/tokenizers/punkt/PY3/README" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/resources/nltk_data/models/punkt/PY3/czech.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/api/resources/nltk_data/tokenizers/punkt/PY3/czech.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/resources/nltk_data/models/punkt/PY3/danish.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/api/resources/nltk_data/tokenizers/punkt/PY3/danish.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/resources/nltk_data/models/punkt/PY3/dutch.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/api/resources/nltk_data/tokenizers/punkt/PY3/dutch.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/resources/nltk_data/models/punkt/PY3/english.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/api/resources/nltk_data/tokenizers/punkt/PY3/english.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/resources/nltk_data/models/punkt/PY3/estonian.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/api/resources/nltk_data/tokenizers/punkt/PY3/estonian.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/resources/nltk_data/models/punkt/PY3/finnish.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/api/resources/nltk_data/tokenizers/punkt/PY3/finnish.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/resources/nltk_data/models/punkt/PY3/french.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/api/resources/nltk_data/tokenizers/punkt/PY3/french.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/resources/nltk_data/models/punkt/PY3/german.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/api/resources/nltk_data/tokenizers/punkt/PY3/german.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/resources/nltk_data/models/punkt/PY3/greek.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/api/resources/nltk_data/tokenizers/punkt/PY3/greek.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/resources/nltk_data/models/punkt/PY3/italian.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/api/resources/nltk_data/tokenizers/punkt/PY3/italian.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/resources/nltk_data/models/punkt/PY3/malayalam.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/api/resources/nltk_data/tokenizers/punkt/PY3/malayalam.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/resources/nltk_data/models/punkt/PY3/norwegian.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/api/resources/nltk_data/tokenizers/punkt/PY3/norwegian.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/resources/nltk_data/models/punkt/PY3/polish.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/api/resources/nltk_data/tokenizers/punkt/PY3/polish.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/resources/nltk_data/models/punkt/PY3/portuguese.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/api/resources/nltk_data/tokenizers/punkt/PY3/portuguese.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/resources/nltk_data/models/punkt/PY3/russian.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/api/resources/nltk_data/tokenizers/punkt/PY3/russian.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/resources/nltk_data/models/punkt/PY3/slovene.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/api/resources/nltk_data/tokenizers/punkt/PY3/slovene.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/resources/nltk_data/models/punkt/PY3/spanish.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/api/resources/nltk_data/tokenizers/punkt/PY3/spanish.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/resources/nltk_data/models/punkt/PY3/swedish.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/api/resources/nltk_data/tokenizers/punkt/PY3/swedish.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/resources/nltk_data/models/punkt/PY3/turkish.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/api/resources/nltk_data/tokenizers/punkt/PY3/turkish.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/resources/nltk_data/models/punkt/README" beforeDir="false" afterPath="$PROJECT_DIR$/api/resources/nltk_data/tokenizers/punkt/README" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/resources/nltk_data/models/punkt/czech.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/api/resources/nltk_data/tokenizers/punkt/czech.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/resources/nltk_data/models/punkt/danish.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/api/resources/nltk_data/tokenizers/punkt/danish.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/resources/nltk_data/models/punkt/dutch.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/api/resources/nltk_data/tokenizers/punkt/dutch.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/resources/nltk_data/models/punkt/english.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/api/resources/nltk_data/tokenizers/punkt/english.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/resources/nltk_data/models/punkt/estonian.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/api/resources/nltk_data/tokenizers/punkt/estonian.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/resources/nltk_data/models/punkt/finnish.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/api/resources/nltk_data/tokenizers/punkt/finnish.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/resources/nltk_data/models/punkt/french.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/api/resources/nltk_data/tokenizers/punkt/french.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/resources/nltk_data/models/punkt/german.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/api/resources/nltk_data/tokenizers/punkt/german.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/resources/nltk_data/models/punkt/greek.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/api/resources/nltk_data/tokenizers/punkt/greek.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/resources/nltk_data/models/punkt/italian.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/api/resources/nltk_data/tokenizers/punkt/italian.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/resources/nltk_data/models/punkt/malayalam.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/api/resources/nltk_data/tokenizers/punkt/malayalam.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/resources/nltk_data/models/punkt/norwegian.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/api/resources/nltk_data/tokenizers/punkt/norwegian.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/resources/nltk_data/models/punkt/polish.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/api/resources/nltk_data/tokenizers/punkt/polish.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/resources/nltk_data/models/punkt/portuguese.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/api/resources/nltk_data/tokenizers/punkt/portuguese.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/resources/nltk_data/models/punkt/russian.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/api/resources/nltk_data/tokenizers/punkt/russian.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/resources/nltk_data/models/punkt/slovene.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/api/resources/nltk_data/tokenizers/punkt/slovene.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/resources/nltk_data/models/punkt/spanish.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/api/resources/nltk_data/tokenizers/punkt/spanish.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/resources/nltk_data/models/punkt/swedish.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/api/resources/nltk_data/tokenizers/punkt/swedish.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/resources/nltk_data/models/punkt/turkish.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/api/resources/nltk_data/tokenizers/punkt/turkish.pickle" afterDir="false" />
-    </list>
+    <list default="true" id="cd594a56-4ebd-4e4a-944d-5eca868d2bef" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

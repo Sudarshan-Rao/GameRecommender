@@ -45,5 +45,6 @@ def get_recommendations(req: get_recommendation_req):
     print(game_rec_resp)
     return game_rec_resp
 
+
 if __name__ == '__main__':
     uvicorn.run(app, host="0.0.0.0", port=8000)
