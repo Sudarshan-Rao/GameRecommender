@@ -1,6 +1,10 @@
 import sqlite3
-
 from fuzzywuzzy import fuzz
+import os.path as pt
+import sys
+
+db_path = pt.join(pt.split(pt.dirname(pt.abspath(__file__)))[0], 'resources/preprocess.db')
+sys.path.insert(1, pt.dirname(pt.abspath(__file__)))
 
 import preprocess_text
 
@@ -13,12 +17,13 @@ def get_ngrams(search_string):
 
 # get all tags
 def load_all_tags():
-    db_connection = sqlite3.connect("./resources/preprocess.db")
+    all_tags = []
+    tag_ids = []
+    db_connection = sqlite3.connect(db_path)
     db_cursor = db_connection.cursor()
     db_cursor.execute("SELECT * FROM TAGS")
     tags_table = db_cursor.fetchall()
-    all_tags = []
-    tag_ids = []
+
     for tags in tags_table:
         all_tags.append(tags[1])
         tag_ids.append(tags[0])
@@ -27,6 +32,8 @@ def load_all_tags():
 
 # fuzzy match with all tags and get corresponding tag
 def get_matching_tags(search_string):
+    if search_string == "":
+        return []
     all_tags, tag_ids = load_all_tags()
     one_gram, bi_grams = get_ngrams(search_string)
     match_ratio = []
