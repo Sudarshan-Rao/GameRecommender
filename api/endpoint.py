@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import sys
+import uvicorn
 
 sys.path.append('./utils')
 
@@ -43,3 +44,6 @@ def get_recommendations(req: get_recommendation_req):
     game_rec_resp = get_recommendation.get_game_with_tags(search_string)
     print(game_rec_resp)
     return game_rec_resp
+
+if __name__ == '__main__':
+    uvicorn.run(app, host="0.0.0.0", port=8000)
