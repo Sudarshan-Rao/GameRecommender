@@ -24,9 +24,10 @@ class Game_Data:
 
 class Game_Recommendation_Resp:
     game_recommendation: list
+    game_tags: list
 
 
-def get_game_with_tags(search_string):
+def get_game_with_tags(search_string, debug):
     db_connection = sqlite3.connect(db_path)
     db_cursor = db_connection.cursor()
 
@@ -56,8 +57,10 @@ def get_game_with_tags(search_string):
         game_data_list.append(game_obj)
 
     game_recommendation_resp.game_recommendation = game_data_list[:50]
+    if debug:
+        game_recommendation_resp.game_tags = matched_tags
     return game_recommendation_resp
 
 
 if __name__ == '__main__':
-    get_game_with_tags('shooter')
+    get_game_with_tags('shooter', False)
