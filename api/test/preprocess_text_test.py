@@ -9,7 +9,7 @@ class MyTestCase(unittest.TestCase):
         test_string_without_punctuation = "Hello"
         self.assertEqual(test_string_without_punctuation, removed_punctuation_string)
 
-    def test_remove_tokenization(self):
+    def test_tokenization(self):
         test_string = "Hello World"
         tokenized_string = preprocess_text.tokenization(test_string)
         test_string_tokenized = ["Hello", "World"]

@@ -5,6 +5,11 @@ from nltk.stem.porter import PorterStemmer
 from nltk.stem import WordNetLemmatizer
 from nltk.util import ngrams
 
+import os.path as pt
+
+nltk_path = pt.join(pt.split(pt.dirname(pt.abspath(__file__)))[0], 'resources/nltk_data')
+nltk.data.path.append(nltk_path)
+
 # Stop words present in the library
 stopwords = nltk.corpus.stopwords.words('english')
 
