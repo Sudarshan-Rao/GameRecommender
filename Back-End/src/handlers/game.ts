@@ -7,7 +7,9 @@ export const getGameRecommendationsHandler = async (
 ) => {
   try {
     // console.log(req.body);
-    const url = process.env.PYTHON_GAME_RECOMMENDATION_API;
+    const url =
+      process.env.PYTHON_GAME_RECOMMENDATION_API +
+      '/get-recommendation';
 
     // construct request body
     const body = {
@@ -28,11 +30,12 @@ export const getGameRecommendationsHandler = async (
 
 export const getTrendingGamesHandler = async (req, res, next) => {
   try {
-    const url = process.env.PYTHON_TRENDING_GAMES_API;
+    const url =
+      process.env.PYTHON_GAME_RECOMMENDATION_API + '/get-trending';
 
     // send request to backend
     const response = await axios.get(url);
-    // console.log(response.data);
+    console.log(response.data);
 
     // send the response back to the client
     res.status(200);

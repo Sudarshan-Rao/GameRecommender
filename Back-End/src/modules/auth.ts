@@ -13,7 +13,7 @@ export const hashPassword = async (password: string) => {
   return await bcrypt.hash(password, 10);
 };
 
-export const generateAccessToken = async (user: any) => {
+export const generateAccessToken = (user: any) => {
   return jwt.sign(
     { id: user._id, email: user.email, name: user.name },
     process.env.JWT_ACCESS_TOKEN_SECRET,
@@ -23,7 +23,7 @@ export const generateAccessToken = async (user: any) => {
   );
 };
 
-export const generateRefreshToken = async (user: any) => {
+export const generateRefreshToken = (user: any) => {
   return jwt.sign(
     { id: user._id, email: user.email, name: user.name },
     process.env.JWT_REFRESH_TOKEN_SECRET,
@@ -56,7 +56,12 @@ export const refreshTokenHandler = async (req, res, next) => {
           return;
         }
 
+        console.log(
+          `Refresh token verified for user ${user.email} ${user}`
+        );
+
         const accessToken = generateAccessToken(user);
+        console.log(`Access token after refresh: ${accessToken}`);
         res.status(200).json({ accessToken });
       }
     );
@@ -77,6 +82,7 @@ export const isAuth = (req: any, res: any, next: any) => {
 
   const token = authorization.slice(7, authorization.length); // Bearer XXXXXX
 
+  console.log(`isAuthToken: ${token}`);
   try {
     const decoded = jwt.verify(
       token,

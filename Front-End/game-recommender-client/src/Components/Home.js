@@ -80,7 +80,7 @@ const Home = () => {
               keywords.
             </p>
           ) : (
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mb-14">
               {games.map((game) => (
                 <a
                   key={game.app_id}

@@ -54,8 +54,6 @@ const Login = () => {
           accessToken: response?.data?.accessToken,
         })
       );
-      // store refresh token in cookie
-      console.log(`Document.cookie: ${document.cookie}`);
 
       setUserEmail('');
       setPwd('');
