@@ -25,3 +25,19 @@ export const getGameRecommendationsHandler = async (
     next(error);
   }
 };
+
+export const getTrendingGamesHandler = async (req, res, next) => {
+  try {
+    const url = process.env.PYTHON_TRENDING_GAMES_API;
+
+    // send request to backend
+    const response = await axios.get(url);
+    // console.log(response.data);
+
+    // send the response back to the client
+    res.status(200);
+    res.json(response.data);
+  } catch (error) {
+    next(error);
+  }
+};

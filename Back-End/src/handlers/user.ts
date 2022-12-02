@@ -15,7 +15,11 @@ export const registerUserHandler = async (req, res, next) => {
       return;
     }
 
-    const duplicateUser = await User.findOne({ email }).exec();
+    const emailLowerCase = email.toLowerCase();
+
+    const duplicateUser = await User.findOne({
+      email: emailLowerCase,
+    }).exec();
     if (duplicateUser) {
       res.status(400);
       res.json({ message: 'User already exists' });
@@ -25,7 +29,7 @@ export const registerUserHandler = async (req, res, next) => {
     const hashedPassword = await hashPassword(password);
 
     const user = await User.create({
-      email,
+      email: emailLowerCase,
       name,
       password: hashedPassword,
     });
@@ -48,9 +52,9 @@ export const loginUserHandler = async (req, res, next) => {
       return;
     }
 
-    const user = await User.findOne({
-      email,
-    }).exec();
+    const emailLowerCase = email.toLowerCase();
+
+    const user = await User.findOne({ email: emailLowerCase }).exec();
 
     if (!user) {
       res.status(401);
@@ -82,7 +86,7 @@ export const loginUserHandler = async (req, res, next) => {
       sameSite: 'None',
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
-    res.json({ accessToken });
+    res.status(200).json({ accessToken });
   } catch (error) {
     error.type = 'auth';
     next(error);

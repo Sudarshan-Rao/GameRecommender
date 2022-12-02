@@ -1,30 +1,58 @@
 import React from 'react';
+import { useEffect, useState } from 'react';
+import useAxiosPrivate from '../CustomHooks/useAxiosPrivate';
+import Loading from './Loading';
 
 const Trending = () => {
+  const [trending, setTrending] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const axiosPrivate = useAxiosPrivate();
+
+  useEffect(() => {
+    const getTrending = async () => {
+      setIsLoading(true);
+      try {
+        const response = await axiosPrivate.get('/api/trending');
+        setTrending(response.data);
+      } catch (err) {
+        console.log(`getTrending error: ${err}`);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    getTrending();
+  }, []);
+
   return (
-    <div className="flex items-center justify-center">
-      <h1 className="text-4xl font-bold">Trending</h1>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        <div className="bg-white shadow-md rounded-lg overflow-hidden">
-          <div
-            className="bg-cover bg-center h-56 p-4"
-            style={{
-              backgroundImage:
-                "url('https://images.igdb.com/igdb/image/upload/t_cover_big/co1q0m.jpg')",
-            }}
-          ></div>
-          <div className="p-4">
-            <h1 className="text-gray-900 font-bold uppercase">
-              The Legend of Zelda: Breath of the Wild
-            </h1>
-            <p className="mt-1 text-gray-600">
-              The Legend of Zelda: Breath of the Wild is an
-              action-adventure game developed and published by
-              Nintendo for the Nintendo Switch and Wii U video game
-              consoles. Set in the fantasy land of Hyrule, the game
-              follows a
-            </p>
-          </div>
+    <div className="Trending">
+      <div className="container mx-auto">
+        <div className="flex flex-col items-center justify-center mt-5">
+          <h1 className="text-4xl font-bold text-center text-gray-800">
+            Trending Games
+          </h1>
+          <p className="text-xl text-center text-gray-600 mt-5">
+            Check out the most popular games on Game Recommender!
+          </p>
+        </div>
+        <div className="flex flex-col items-center justify-center mt-5">
+          {isLoading ? (
+            <Loading />
+          ) : (
+            <div className="flex flex-col items-center justify-center">
+              {trending.map((game) => (
+                <div key={game.id} className="flex flex-col items-center justify-center" data-testid="trending-cards">
+                  <img
+                    src={game.background_image}
+                    alt={game.name}
+                    className="w-64 h-64"
+                  />
+                  <p className="text-xl text-center text-gray-600 mt-5">
+                    {game.name}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -32,3 +60,4 @@ const Trending = () => {
 };
 
 export default Trending;
+

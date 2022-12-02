@@ -57,7 +57,7 @@ export const refreshTokenHandler = async (req, res, next) => {
         }
 
         const accessToken = generateAccessToken(user);
-        res.json({ accessToken });
+        res.status(200).json({ accessToken });
       }
     );
   } catch (error) {

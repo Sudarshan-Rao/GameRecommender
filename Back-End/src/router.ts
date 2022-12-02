@@ -1,5 +1,8 @@
 import { Router } from 'express';
-import { getGameRecommendationsHandler } from './handlers/game';
+import {
+  getGameRecommendationsHandler,
+  getTrendingGamesHandler,
+} from './handlers/game';
 
 const router = Router();
 
@@ -10,6 +13,7 @@ router.get('/', (req, res) => {
 });
 
 router.post('/searchrecomendations', getGameRecommendationsHandler);
+router.get('/trending', getTrendingGamesHandler);
 
 router.use((err, req, res, next) => {
   if (err.type === 'auth') {

@@ -16,12 +16,13 @@ const NavBar = () => {
   };
 
   return (
-    <nav className="relative flex items-center justify-between px-2 py-3 bg-yellow-500">
+    <nav className="relative flex items-center justify-between px-2 py-3 bg-yellow-500" data-testid="navbar">
       <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
         <div className="w-full relative flex justify-between lg:w-auto  px-4 lg:static lg:block lg:justify-start">
           <Link
             to="/"
             className="text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-white"
+            data-testid="game-recommender-nav"
           >
             Game Recommender
           </Link>
@@ -35,6 +36,7 @@ const NavBar = () => {
               <Link
                 to="/trending"
                 className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+                data-testid="trending-nav"
               >
                 <span className="ml-2">Trending</span>
               </Link>
@@ -46,6 +48,7 @@ const NavBar = () => {
         <button
           onClick={handleLogout}
           className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+          data-testid="logout-button"
         >
           <span className="ml-2">Logout</span>
         </button>

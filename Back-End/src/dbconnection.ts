@@ -1,14 +1,20 @@
 import mongoose from 'mongoose';
+import { MongoMemoryServer } from 'mongodb-memory-server';
 import { config } from 'dotenv';
 config();
 
 export const dbConnection = async () => {
   try {
-    mongoose.connect(process.env.MONGO_URI);
+    await mongoose.connect(process.env.MONGO_URI);
   } catch (err) {
     console.log(err);
     throw new Error('Error connecting to database');
   }
+};
+
+export const closeDatabase = async () => {
+  await mongoose.connection.close();
+  await mongoose.disconnect();
 };
 
 export const userSchema = new mongoose.Schema({

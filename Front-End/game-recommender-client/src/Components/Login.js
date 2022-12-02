@@ -114,6 +114,7 @@ const Login = () => {
                 value={userEmail}
                 onChange={(e) => setUserEmail(e.target.value)}
                 ref={userRef}
+                data-testid="email-address"
               />
             </div>
             <div>
@@ -130,6 +131,7 @@ const Login = () => {
                 placeholder="Password"
                 value={pwd}
                 onChange={(e) => setPwd(e.target.value)}
+                data-testid="password"
               />
             </div>
           </div>
@@ -143,6 +145,7 @@ const Login = () => {
                 className="h-4 w-4 text-yellow-600 focus:ring-yellow-500 border-gray-300 rounded"
                 checked={persist}
                 onChange={togglePersist}
+                data-testid="remember-me"
               />
               <label
                 htmlFor="remember-me"
@@ -157,6 +160,7 @@ const Login = () => {
             <button
               type="submit"
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-500 hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
+              data-testid="login-button"
             >
               <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                 <LockClosedIcon
@@ -202,6 +206,7 @@ const Login = () => {
                   type="button"
                   className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-yellow-700 bg-yellow-200 hover:bg-yellow-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
                   onClick={() => navigate('/register')}
+                  data-testid="register-button-login"
                 >
                   <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                     <UserIcon
