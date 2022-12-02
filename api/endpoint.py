@@ -4,13 +4,13 @@ from pydantic import BaseModel
 import sys
 from typing import Optional
 import uvicorn
+from utils import get_recommendation, get_top10
 
-sys.path.append('./utils')
 
-from utils import get_recommendation
+sys.path.append('../utils')
+
 
 app = FastAPI()
-
 origins = [
     "http://localhost:3000",
     "http://localhost:8080",
@@ -46,6 +46,12 @@ def get_recommendations(req: get_recommendation_req):
     game_rec_resp = get_recommendation.get_game_with_tags(search_string, req.debug)
     print(game_rec_resp)
     return game_rec_resp
+
+
+@app.get("/get-trending")
+def get_trending():
+    game_rec_resp = get_top10.get_top10()
+    return {"trending_games": game_rec_resp}
 
 
 if __name__ == '__main__':
