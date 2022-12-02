@@ -1,4 +1,5 @@
 from fuzzywuzzy import fuzz
+from nltk.util import ngrams
 import sqlite3
 
 game_desc = """Diamond is a fast paced puzzle game demanding quick reflexes as you control a ball with perpetual vertical momentum through a wealth of various levels. With over 30 individual puzzle components, the goal of destroying gems is rarely ever as simple as matching your color and hitting them.
@@ -24,6 +25,16 @@ db_cursor = db_connection.cursor()
 # db_connection.commit()
 
 
+def calculateNgramMatch(n_grams, phrase):
+    for n_gram in n_grams:
+        joint_candidate_word = " ".join(n_gram)
+        ratio = fuzz.token_sort_ratio(joint_candidate_word, phrase)
+        if ratio > 89:
+            return ratio
+    return 0
+
+
+# db_cursor.execute("select * from GameData WHERE steamId ="+ str(324090))
 
 db_cursor.execute("select * from GameData")
 
@@ -33,19 +44,43 @@ db_cursor.execute("select * from Phrases where Processed = 0")
 
 phrases = db_cursor.fetchall()
 
+
+print(len(game_data))
 for game_index in range(len(game_data)):
     print(game_index)
     for phrase in phrases:
         game = game_data[game_index]
-        about_ratio  = fuzz.token_set_ratio(game["about"], phrase["phrase"])
-        review_ratio = fuzz.token_set_ratio(game["reviews"], phrase["phrase"])
-        if about_ratio > 90 or review_ratio > 90:
+
+        phrase_words = phrase["phrase"].split()
+        about_game_words = game["about"].split()
+        game_review_words = game["reviews"].split()
+        about_n_gram_ratio = 0
+        review_n_gram_ratio = 0
+        about_ratio = 0
+        review_ratio = 0
+        # print(phrase["phrase"])
+        if (len(phrase_words) > 1):
+            about_n_grams = list(ngrams(about_game_words, len(phrase_words)))
+            review_n_grams = list(ngrams(game_review_words, len(phrase_words)))
+            about_n_gram_ratio = calculateNgramMatch(about_n_grams, phrase["phrase"])
+            review_n_gram_ratio = calculateNgramMatch(review_n_grams, phrase["phrase"])
+            
+        else:
+            about_ratio  = fuzz.token_set_ratio(game["about"], phrase["phrase"])
+            review_ratio = fuzz.token_set_ratio(game["reviews"], phrase["phrase"])
+        
+        # print(about_n_gram_ratio)
+        # print(review_n_gram_ratio)
+
+        # print(about_ratio)
+        # print(review_ratio)
+        # print("----------")
+        if ((about_ratio > 89 or review_ratio > 89) and len(phrase_words) == 1) or ((review_n_gram_ratio > 89  or about_n_gram_ratio > 89) and len(phrase_words) > 1):
             db_cursor.execute("INSERT INTO TaggedGames VALUES (?, ?, ?, ?)", (None, game["steamId"], phrase["tagId"], phrase["id"]))
         db_cursor.execute("UPDATE Phrases SET Processed = 1 WHERE id = "+ str(phrase["id"]))
 
 
 db_connection.commit()
-
 
 # make a table with matching phrase for tags, each tag wll have itself as a matching phrase, column preprocessed?t/f
 
