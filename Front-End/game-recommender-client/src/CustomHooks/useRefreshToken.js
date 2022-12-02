@@ -5,7 +5,6 @@ const useRefreshToken = () => {
   const { setAuth } = useAuth();
 
   const refresh = async () => {
-    console.log(`Document.cookie: ${document.cookie}`);
     const response = await axiosInstance.get('/refresh');
     console.log(`response: ${JSON.stringify(response)}`);
     console.log(response);

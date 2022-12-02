@@ -120,6 +120,7 @@ const Register = () => {
             <button
               className="px-4 py-2 mt-4 text-white bg-yellow-500 rounded hover:bg-yellow-600"
               onClick={() => navigate('/login')}
+              data-testid="login-button-successful-register"
             >
               Login
             </button>
@@ -154,6 +155,7 @@ const Register = () => {
                     onFocus={() => setUserFocus(true)}
                     onBlur={() => setUserFocus(false)}
                     ref={userRef}
+                    data-testid="email-input"
                   />
                 </div>
                 <div className="text-red-500 text-sm">{errMsg}</div>
@@ -184,6 +186,7 @@ const Register = () => {
                     onChange={(e) => setUserName(e.target.value)}
                     onFocus={() => setNameFocus(true)}
                     onBlur={() => setNameFocus(false)}
+                    data-testid="name-input"
                   />
                 </div>
                 <div>
@@ -203,6 +206,7 @@ const Register = () => {
                     onChange={(e) => setPwd(e.target.value)}
                     onFocus={() => setPwdFocus(true)}
                     onBlur={() => setPwdFocus(false)}
+                    data-testid="password-input"
                   />
                 </div>
                 <p
@@ -234,6 +238,7 @@ const Register = () => {
                     onChange={(e) => setMatchPwd(e.target.value)}
                     onFocus={() => setMatchFocus(true)}
                     onBlur={() => setMatchFocus(false)}
+                    data-testid="match-input"
                   />
                 </div>
                 <p
@@ -256,6 +261,7 @@ const Register = () => {
                     : 'opacity-50 cursor-not-allowed'
                     }`}
                   disabled={!(validEmail && validPwd && validMatch)}
+                  data-testid="register-button"
                 >
                   <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                     <UserIcon
@@ -284,6 +290,7 @@ const Register = () => {
                     type="button"
                     className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-yellow-700 bg-yellow-100 hover:bg-yellow-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
                     onClick={() => navigate('/login')}
+                    data-testid="login-button-register"
                   >
                     <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                       <LockClosedIcon
