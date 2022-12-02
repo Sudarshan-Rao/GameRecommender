@@ -7,7 +7,7 @@ import uvicorn
 from utils import get_recommendation, get_top10
 
 
-sys.path.append('../utils')
+sys.path.append('./utils')
 
 
 app = FastAPI()
