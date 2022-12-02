@@ -2,6 +2,7 @@ import sqlite3
 import match_tags
 import os.path as pt
 import sys
+import itertools
 
 db_path = pt.join(pt.split(pt.dirname(pt.abspath(__file__)))[0], 'resources/preprocess.db')
 sys.path.insert(1, pt.dirname(pt.abspath(__file__)))
@@ -27,6 +28,21 @@ class Game_Recommendation_Resp:
     game_tags: list
 
 
+def rank_games_based_on_max_matches(all_ids, game_list):
+    rank_map = {}
+    for game_id in all_ids:
+        rank_map[game_id] = 1
+
+    for game_id in all_ids:
+        for tags in game_list:
+            if game_id in tags:
+                rank_map[game_id] = rank_map[game_id] + 1
+    rank_map = dict(sorted(rank_map.items(), key=lambda item: item[1]))
+    rank_map = dict(reversed(list(rank_map.items())))
+    top_fifty = dict(itertools.islice(rank_map.items(), 50))
+    return list(top_fifty.keys())
+
+
 def get_game_with_tags(search_string, debug):
     db_connection = sqlite3.connect(db_path)
     db_cursor = db_connection.cursor()
@@ -37,14 +53,15 @@ def get_game_with_tags(search_string, debug):
     for tag_id in matched_tags:
         db_cursor.execute("SELECT appId FROM TaggedGames WHERE tagId = " + str(tag_id))
         game_recommendations_lists.append(db_cursor.fetchall())
-
     game_recommendations_ids = set()
     for game_list in game_recommendations_lists:
         for game_id in game_list:
             game_recommendations_ids.add(game_id)
 
+    ranked_games = rank_games_based_on_max_matches(game_recommendations_ids, game_recommendations_lists)
+
     game_recommendations = []
-    for app_id in game_recommendations_ids:
+    for app_id in ranked_games:
         db_cursor.execute("SELECT * FROM GameData WHERE steamId = " + str(app_id[0]))
         game_recommendations.append(db_cursor.fetchone())
 
@@ -63,4 +80,4 @@ def get_game_with_tags(search_string, debug):
 
 
 if __name__ == '__main__':
-    get_game_with_tags('shooter', False)
+    get_game_with_tags('open world fps with some action', False)
