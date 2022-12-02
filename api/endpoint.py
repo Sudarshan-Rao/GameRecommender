@@ -4,11 +4,10 @@ from pydantic import BaseModel
 import sys
 from typing import Optional
 import uvicorn
-from utils import get_recommendation, get_top10
-
 
 sys.path.append('./utils')
 
+from utils import get_recommendation, get_top10
 
 app = FastAPI()
 origins = [
