@@ -2,11 +2,10 @@ import sqlite3
 from fuzzywuzzy import fuzz
 import os.path as pt
 import sys
+import preprocess_text
 
 db_path = pt.join(pt.split(pt.dirname(pt.abspath(__file__)))[0], 'resources/preprocess.db')
 sys.path.insert(1, pt.dirname(pt.abspath(__file__)))
-
-import preprocess_text
 
 
 # get the one_gram and bi_grams
