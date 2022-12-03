@@ -34,5 +34,23 @@ describe('Game Recommender Register User', () => {
 
         cy.get('[data-testid=login-button]').should('not.exist')
     })
+
+    it('should verify password requirements', () => {
+        const no_caps_password = 'test@123'
+        const no_num_password = 'test@'
+        const no_num_caps_password = 'test'
+        const valid_password = 'Test@123'
+
+        cy.get('[data-testid=register-button-login]').click()
+        cy.get('[data-testid=password]').focus()
+        cy.get('[data-testid=password]').type(`${no_caps_password}`)
+        cy.get('[data-testid=pwdnote]').should('be.visible')
+        cy.get('[data-testid=password]').type(`${no_num_password}`)
+        cy.get('[data-testid=pwdnote]').should('be.visible')
+        cy.get('[data-testid=password]').type(`${no_num_caps_password}`)
+        cy.get('[data-testid=pwdnote]').should('be.visible')
+        cy.get('[data-testid=password]').type(`${valid_password}`)
+        cy.get('[data-testid=pwdnote]').should('not.be.visible')
+    })
 })
 
