@@ -46,8 +46,7 @@ const Home = () => {
             Welcome to Game Recommender!
           </h1>
           <p className="text-xl text-center text-gray-600 mt-5">
-            Type in keywords of a game you like and we'll recommend
-            similar games!
+          In a few words describe what kind of game you'd like to play.
           </p>
         </div>
         <div className="flex items-center px-3 py-2 rounded-lg shadow-md mt-5 bg-gray-50 dark:bg-gray-700">
