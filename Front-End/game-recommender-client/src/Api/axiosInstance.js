@@ -6,10 +6,10 @@ const BASE_URL = 'https://gamerecommenderbackendnode.onrender.com' || 'http://lo
 
 export default axios.create({
   baseURL: BASE_URL,
-  timeout: 10000,
+  timeout: 100000,
 });
 
 export const axiosPrivate = axios.create({
   baseURL: BASE_URL,
-  timeout: 10000,
+  timeout: 100000,
 });
