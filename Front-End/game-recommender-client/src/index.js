@@ -3,12 +3,18 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 // import reportWebVitals from './reportWebVitals';
-import {AuthProvider} from './Context/AuthContext';
+import { AuthProvider } from './Context/AuthContext';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import axiosInstance from './Api/axiosInstance';
 
-// warm up the backend server
+// warm up the backend node server
 axiosInstance.get('/');
+
+//warm up the backend python server with timeout
+fetch(process.env.REACT_APP_NODE_BACKEND_BASE_URL + '/', {
+  method: 'GET',
+  timeout: 10000,
+});
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
