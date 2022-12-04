@@ -211,6 +211,7 @@ const Register = () => {
                 </div>
                 <p
                   id="pwdnote"
+                  data-testid="pwdnote"
                   className={
                     pwdFocus && pwd && !validPwd
                       ? 'text-red-500 text-sm'
